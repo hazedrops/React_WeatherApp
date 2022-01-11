@@ -1,0 +1,138 @@
+nav {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: $background-color-dark;
+
+  .nav-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 90vh;
+
+    @include mq(600px) {
+      width: 100%;
+    }
+
+    div {
+      .logo {
+        width: 4em;
+        height: 4em;
+      }
+    }
+
+    .searchBar {
+      width: 60%;
+      min-width: 6em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 2px solid $search-bar-border;
+      border-radius: 400px;
+      padding: 0.2rem 0.25rem 0.2rem 0.75rem;
+
+      @include mq(375px) {
+        padding: 0.2rem 0.25rem 0.2rem 0.75rem;
+      }
+
+      input[type='text'] {
+        background: transparent;
+        color: $input-color;
+        flex-grow: 1;
+        font-size: 1em;
+        text-align: left;
+        letter-spacing: 0.1em;
+        border: 0;
+        outline: none;
+        min-width: 2em;
+
+        @include mq(768px) {
+          font-size: 1.25rem;
+        }
+      }
+
+      ::placeholder {
+        color: $input-color;
+        text-align: center;
+        font-size: 1em;
+
+        @include mq(768px) {
+          font-size: 0.75em;
+        }
+
+        @include mq(540px) {
+          font-size: 0.6em;
+        }
+      }
+
+      .button {
+        cursor: pointer;
+        color: white;
+        border: 0;
+        background: transparent;
+        min-width: 3em;
+        min-height: 3em;
+        outline: none;
+
+        @include mq(480px) {
+          min-width: 2em;
+          padding-left: 0.5em;
+        }
+
+        // i {
+        //   font-size: 2em;
+        //   color: $input-color;
+        //   background-color: yellow;
+
+        //   @include mq(480px) {
+        //     font-size: 1.5em;
+        //   }
+        // }
+      }
+
+      .searchButton:hover,
+      .searchButton:focus {
+        i {
+          color: $logo-color;
+        }
+      }
+
+      .clear {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $input-color;
+        font-weight: 400;
+        font-size: 0.8em;
+        border-right: thin solid $search-bar-border;
+
+        @include mq(768px) {
+          padding: 0.5em 1em;
+        }
+
+        @include mq(480px) {
+          padding: 0 0.5em;
+        }
+      }
+
+      .clear:hover,
+      .clear:focus {
+        i {
+          color: $logo-color;
+        }
+      }
+    }
+
+    .modeSelector {
+      cursor: pointer;
+      background: $background-color-light;
+      padding: 0.3rem;
+      border-radius: 50%;
+    }
+  }
+}

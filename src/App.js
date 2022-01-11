@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import './styles/style.scss';
+import Logo from './Logo';
+import SearchBar from './SearchBar';
+import ChangeMode from './ChangeMode';
+import Main from './Main';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <nav className="nav">
+        <div className="nav-container">
+          {/* logo in the nav bar */}
+          <Logo />
+
+          {/* search bar in the nav bar */}
+          <SearchBar />
+
+          {/* Change Mode F/C */}
+          <ChangeMode />
+        </div>
+      </nav>
+      <Main />
     </div>
   );
 }
