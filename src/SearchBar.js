@@ -1,22 +1,10 @@
-import { useState } from 'react'
+import { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faSearch } from '@fortawesome/free-solid-svg-icons'
+import WeatherAppContext from './context/WeatherAppContext';
 
 function SearchBar() {
-  const [isTyped, setIsTyped] = useState(false);
-  const [inputValue, setInputValue] = useState("");
-
-  const handleChange = (e) => {
-    setIsTyped(true);
-
-    setInputValue(e.target.value);
-  }
-
-  const handleClear = () => {
-    console.log("Clear button clicked!!");
-    setInputValue("");
-    setIsTyped(false);
-  }
+  const { isTyped, inputValue, handleChange, handleClear, handleSearch } = useContext(WeatherAppContext);
 
   return (
     <form className="searchBar">
@@ -27,7 +15,7 @@ function SearchBar() {
         >
           <FontAwesomeIcon icon={faTimes} size="lg" />
         </div>
-        <button className="button searchButton">
+        <button className="button searchButton" onClick={handleSearch}>
         <FontAwesomeIcon icon={faSearch} size="lg" />
       </button>
     </form>
