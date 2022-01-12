@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import WeatherAppContext from "./context/WeatherAppContext";
 
 function InfoDiv() {
@@ -10,7 +10,9 @@ function InfoDiv() {
     setWeatherDesc(weatherInfo.weather[0].main);
 
     const imgUrl = showWeatherImage(weatherDesc);
+
     setWeatherImgUrl(imgUrl);
+    console.log(typeof(weatherImgUrl));
   }
 
   const showWeatherImage = (weatherDesc) => {
@@ -19,19 +21,19 @@ function InfoDiv() {
 
     switch(category) {
       case 'partly':
-        url = '../WeatherApp/img/partly.webp';
+        url = './img/partly.webp';
         break;
       case 'sun':
-        url = '../WeatherApp/img/sun.webp';
+        url = './sun.webp';
         break;
       case 'rain':
-        url = '../WeatherApp/img/rain.webp';
+        url = './img/rain.webp';
         break;
       case 'wind':
-        url = '../WeatherApp/img/wind.webp';
+        url = './img/wind.webp';
         break;
       default:
-        url = '../WeatherApp/img/cloud.webp';
+        url = './img/cloud.webp';
         break;
     }
 
@@ -54,7 +56,10 @@ function InfoDiv() {
     }
   }
 
-  handleWeatherInfo();
+  useEffect(() => {
+    handleWeatherInfo();
+  }, [city]);
+
   console.log("WeatherDesc:", weatherDesc);
 
   return (
@@ -67,7 +72,7 @@ function InfoDiv() {
       </div> 
       <div className="weatherInfoDiv">
         <div className="weatherDisplay">
-          <img src={weatherImgUrl} alt="" className="weatherImg" />
+          <img src={`${weatherImgUrl}`} alt={weatherDesc} className="weatherImg" />
           <div className="temperatureDiv">{}</div>
         </div>
         <div className="weatherDetail"></div>
