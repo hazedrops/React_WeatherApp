@@ -2,42 +2,43 @@ import { useContext, useState, useEffect } from "react";
 import WeatherAppContext from "./context/WeatherAppContext";
 
 function InfoDiv() {
-  const { weatherInfo, date, city } = useContext(WeatherAppContext);
+  const { weatherInfo, date, city, temp, setTemp } = useContext(WeatherAppContext);
   const [weatherDesc, setWeatherDesc] = useState("");
-  const [weatherImgUrl, setWeatherImgUrl] = useState("");
+  const [weatherImg, setWeatherImg] = useState("");
 
   const handleWeatherInfo = () => {
     setWeatherDesc(weatherInfo.weather[0].main);
+    setTemp(weatherInfo.main.temp.toFixed());
 
-    const imgUrl = showWeatherImage(weatherDesc);
+    const imgString = showWeatherImage(weatherDesc);
 
-    setWeatherImgUrl(imgUrl);
-    console.log(typeof(weatherImgUrl));
+    setWeatherImg(imgString);
+    console.log(weatherImg);
   }
 
   const showWeatherImage = (weatherDesc) => {
     const category = categorize(weatherDesc);
-    let url='';
+    let weatherImg;
 
     switch(category) {
       case 'partly':
-        url = './img/partly.webp';
+        weatherImg = 'partly';
         break;
       case 'sun':
-        url = './sun.webp';
+        weatherImg = 'sun';
         break;
       case 'rain':
-        url = './img/rain.webp';
+        weatherImg = 'rain';
         break;
       case 'wind':
-        url = './img/wind.webp';
+        weatherImg = 'wind';
         break;
       default:
-        url = './img/cloud.webp';
+        weatherImg = 'cloud';
         break;
     }
 
-    return url;
+    return weatherImg;
   }
 
   const categorize = (str) => {
@@ -72,8 +73,8 @@ function InfoDiv() {
       </div> 
       <div className="weatherInfoDiv">
         <div className="weatherDisplay">
-          <img src={`${weatherImgUrl}`} alt={weatherDesc} className="weatherImg" />
-          <div className="temperatureDiv">{}</div>
+          <img src={`./img/${weatherImg}.webp`} alt={weatherDesc} className="weatherImg" />
+          <div className="temperatureDiv">{`${temp}°`}</div>
         </div>
         <div className="weatherDetail"></div>
       </div> 

@@ -8,6 +8,8 @@ export const WeatherAppProvider = ({ children }) => {
   const [weatherInfo, setWeatherInfo] = useState("");  
   const [date, setDate] = useState("");
   const [city, setCity] = useState("");
+  const [temp, setTemp] = useState("");
+  const [mode, setMode] = useState("F");
 
   const handleChange = (e) => {
     setIsTyped(true);
@@ -135,7 +137,11 @@ export const WeatherAppProvider = ({ children }) => {
           weatherInfo,
           date,
           city,
+          temp,
+          mode,
           setWeatherInfo,
+          setTemp,
+          setMode,
           handleChange,
           handleClear,
           handleSearch,
