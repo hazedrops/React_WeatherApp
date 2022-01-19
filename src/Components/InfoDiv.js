@@ -1,8 +1,9 @@
 import { useContext, useState, useEffect } from "react";
-import WeatherAppContext from "./context/WeatherAppContext";
+import WeatherAppContext from "../context/WeatherAppContext";
 
 function InfoDiv() {
-  const { weatherInfo, date, city, temp, setTemp } = useContext(WeatherAppContext);
+  const { weatherInfo, date, city, temp, setTemp, mode, celciTemp, celciTempInfo} = useContext(WeatherAppContext);
+
   const [weatherDesc, setWeatherDesc] = useState("");
   const [weatherImg, setWeatherImg] = useState("");
 
@@ -74,9 +75,27 @@ function InfoDiv() {
       <div className="weatherInfoDiv">
         <div className="weatherDisplay">
           <img src={`./img/${weatherImg}.webp`} alt={weatherDesc} className="weatherImg" />
-          <div className="temperatureDiv">{`${temp}°`}</div>
+          <div className="temperatureDiv">{mode === 'F' ? `${temp}°` : `${celciTemp}°` }</div>
         </div>
-        <div className="weatherDetail"></div>
+        <div className="weatherDetail">
+          <div className="feelsLike">
+            {mode === 'F' ?
+              `Feels Like: ${(+weatherInfo.main.feels_like).toFixed()}°`:
+              `Feels Like: ${(+celciTempInfo.feelsLike).toFixed()}°`
+            }
+          </div>
+          <div className="tempHighLow">            
+            <span className="tempTextSpan">Temp High / Low:</span>            
+            {mode === 'F' ?
+              <span className="tempDegreeSpan">{(+weatherInfo.main.temp_max).toFixed()}° / {(+weatherInfo.main.temp_min).toFixed()}°</span> :
+              <span className="tempDegreeSpan">{(+celciTempInfo.tempHigh).toFixed()}° / {(+celciTempInfo.tempLow).toFixed()}°</span>
+            }
+          </div>
+            
+          <div className="wind">Wind: {weatherInfo.wind.speed} mp/h</div>
+          
+          <div className="humidity">Humidity: {weatherInfo.main.humidity}</div>
+        </div>
       </div> 
     </>
   )

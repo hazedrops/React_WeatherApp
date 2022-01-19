@@ -1,9 +1,8 @@
-import { useContext } from 'react';
-import Logo from './Logo';
-import SearchBar from './SearchBar';
-import ChangeMode from './ChangeMode';
-import Main from './Main';
-import WeatherAppContext, { WeatherAppProvider } from './context/WeatherAppContext';
+import Logo from './Components/Logo';
+import SearchBar from './Components/SearchBar';
+import ChangeMode from './Components/ChangeMode';
+import Main from './Components/Main';
+import { WeatherAppProvider } from './context/WeatherAppContext';
 
 import './styles/style.scss';
 

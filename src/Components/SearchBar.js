@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, faSearch } from '@fortawesome/free-solid-svg-icons'
-import WeatherAppContext from './context/WeatherAppContext';
+import WeatherAppContext from '../context/WeatherAppContext';
 
 function SearchBar() {
   const { isTyped, inputValue, handleChange, handleClear, handleSearch } = useContext(WeatherAppContext);

@@ -10,7 +10,17 @@ export const WeatherAppProvider = ({ children }) => {
   const [city, setCity] = useState("");
   const [temp, setTemp] = useState("");
   const [mode, setMode] = useState("F");
-
+  const [celciTemp, setCelciTemp] = useState("");
+  const [fahrenTemp, setFahrenTemp] = useState("");
+  
+  const [celciTempInfo, setCelciTempInfo] = useState(
+    {
+      feelsLike: "",
+      tempHigh: "",
+      tempLow: ""
+    }
+  );
+  
   const handleChange = (e) => {
     setIsTyped(true);
 
@@ -18,7 +28,6 @@ export const WeatherAppProvider = ({ children }) => {
   }
 
   const handleClear = () => {
-    // console.log("Clear button clicked!!");
     setInputValue("");
     setIsTyped(false);
   }
@@ -29,8 +38,6 @@ export const WeatherAppProvider = ({ children }) => {
     console.log("Search button clicked!!");
 
     fetchWeatherInfo(inputValue);
-
-    // getDate();
 
     setInputValue("");
   }  
@@ -55,8 +62,6 @@ export const WeatherAppProvider = ({ children }) => {
 
     const tempData = geoCodes.results[0].locations[0];
 
-    let resultArray = [];
-
     const lat = tempData.latLng.lat;
     const long = tempData.latLng.lng;
 
@@ -68,7 +73,7 @@ export const WeatherAppProvider = ({ children }) => {
 
   // Encodes URI
   const getGeoCodeData = (searchTerm) => {
-    const rawSearchString = `http://www.mapquestapi.com/geocoding/v1/address?key=Pzhrs2ylWGmTmpobTAkxGdGaVrdCIfhU&location=${searchTerm}`;
+    const rawSearchString = `http://www.mapquestapi.com/geocoding/v1/address?key=${process.env.REACT_APP_MQ_API_KEY}&location=${searchTerm}`;
 
     const searchString = encodeURI(rawSearchString);
     
@@ -100,7 +105,7 @@ export const WeatherAppProvider = ({ children }) => {
   }
 
   const retrieveWeatherInfo = (lat, long) => {
-    const rawSearchString = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=90bd2e2238cfe623292dac7d2a084e2a`;
+    const rawSearchString = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&appid=${process.env.REACT_APP_OW_API_ID}`;
 
     const searchString = encodeURI(rawSearchString);
     
@@ -121,7 +126,6 @@ export const WeatherAppProvider = ({ children }) => {
     const city = weatherInfo.name;
     
     setCity(city)
-    // console.log(date);
   }
 
   useEffect(() => {
@@ -139,6 +143,9 @@ export const WeatherAppProvider = ({ children }) => {
           city,
           temp,
           mode,
+          celciTemp,
+          fahrenTemp,
+          celciTempInfo,
           setWeatherInfo,
           setTemp,
           setMode,
@@ -148,11 +155,14 @@ export const WeatherAppProvider = ({ children }) => {
           fetchWeatherInfo,
           getDate,
           getCity,
+          setCelciTemp, 
+          setFahrenTemp, 
+          setCelciTempInfo,
           retrieveLatLong,
           getGeoCodeData,
           requestData,
           requestWeatherData,
-          retrieveWeatherInfo
+          retrieveWeatherInfo,
         }}
     >
       { children }

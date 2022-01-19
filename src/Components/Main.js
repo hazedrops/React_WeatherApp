@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import WeatherAppContext from "./context/WeatherAppContext";
+import WeatherAppContext from "../context/WeatherAppContext";
 import InfoDiv from './InfoDiv';
 
 function Main() {
