@@ -13,9 +13,7 @@ function Main() {
         {!weatherInfo
           ? (
           <div className="front-message">
-            <p>Enter a City Name</p> 
-            <p>or a Zip Code</p>
-            <p>in the search bar</p>
+            <p>Enter a City Name<br /> or a Zip Code<br /> in the search bar</p>
           </div>
            ) :
           <InfoDiv />
